@@ -3,15 +3,20 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class SetWhiteBoxTests {
-
+public class SetWhiteBoxTests {
+	
+	/* Tests for insert */
+	
+	private Set set;
+	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() {
+		set = new Set();
 	}
 
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		
 	}
 
 }
