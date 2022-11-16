@@ -10,17 +10,12 @@ public class WhiteboxDistinctClosedTests {
 	
 	private Set set;
 	private IntBinaryOperator addition;
-	private IntBinaryOperator substraction;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		set = new Set();
 		addition = (a,b) -> {
 			return a + b;
-		};
-		
-		substraction = (a,b) -> {
-			return a - b;
 		};
 	}
 
@@ -41,7 +36,7 @@ public class WhiteboxDistinctClosedTests {
 	}
 	
 	@Test
-	void test() {
+	void testTwoIteratesAddition() {
 		set.insert(1);
 		set.insert(2);
 		assertFalse(set.distinctClosed(addition));
