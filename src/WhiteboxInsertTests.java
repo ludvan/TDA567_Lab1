@@ -26,7 +26,6 @@ public class WhiteboxInsertTests {
 	@Test
 	void secondPartOfBranchAndStatementCoverage() {
 		int[] temp = new int[] {1,2,3};
-		
 		set.insert(3);
 		set.insert(2);
 		set.insert(1);
