@@ -16,20 +16,24 @@ class WhiteboxMemberTests {
 		set.insert(5);
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
-	}
-
+	/*
+	 * Tests all statements except return false
+	 */
 	@Test
 	void ExistsInSet() {
 		assertTrue(set.member(2));
 	}
 	
+	/*
+	 * Tests all statements except return true, also tests branch i>=a.size
+	 */
 	@Test
 	void LargerThanSet() {
 		assertFalse(set.member(6));	
 	}
-	
+	/*
+	 * Tests all statements except return true, also tests branch a.get(i)>x
+	 */
 	@Test
 	void MissingWithinSet() {
 		assertFalse(set.member(4));	
