@@ -16,7 +16,8 @@ public class Set {
     for (int i = 0; i < a.size(); i++) {
       if (a.get(i) > x) {
         a.add(i, x);
-        break;
+        //break;
+        return; //In order to avoid calling a.add(x)
       } else {
         if (a.get(i) == x) {
           break;
@@ -59,6 +60,7 @@ public class Set {
      }
     }
   }
+  
   // Try with:
   //   (a, b) -> a + b;
   //   (a, b) -> a - b;
