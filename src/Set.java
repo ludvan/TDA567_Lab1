@@ -38,18 +38,25 @@ public class Set {
     return false;
   }
   public void intersect(Set s) {
+	  int newSize = 0;
     for(int i = 0, j = 0 ; i < a.size() && j < s.a.size();) {
       if (a.get(i).equals(s.a.get(j))){
         i++;
         j++;
+        newSize++;
       } else {
         if (a.get(i) < s.a.get(j)) {
           a.remove(i);
-          i++;
+          //i++; Since we remove an element from a, i already points to next element and should therefore not be incremented
         } else {
           j++;
         }
       }
+     // a can still contain elements that should not be left in, 
+     //but since they were bigger than any element in s they have not been removed. This will remove these elements
+     while(a.size() > newSize) { 
+    	 a.remove(a.size()-1);
+     }
     }
   }
   // Try with:

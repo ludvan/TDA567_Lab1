@@ -1,8 +1,4 @@
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,16 +8,16 @@ class WhiteBoxIntersectTests {
 	private Set b;
 	private int[] res = {1};
 
-	@BeforeAll
+	@BeforeEach
 	void setUp() throws Exception {
 		a = new Set();
 		a.insert(1);
 		a.insert(2);
 		a.insert(6);
 		b = new Set();
-		a.insert(1);
-		a.insert(4);
-		a.insert(5);
+		b.insert(1);
+		b.insert(4);
+		b.insert(5);
 	}
 	
 	
