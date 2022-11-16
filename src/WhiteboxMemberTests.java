@@ -13,7 +13,7 @@ class WhiteboxMemberTests {
 		set = new Set();
 		set.insert(1);
 		set.insert(2);
-		set.insert(3);
+		set.insert(5);
 	}
 
 	@AfterEach
@@ -26,7 +26,12 @@ class WhiteboxMemberTests {
 	}
 	
 	@Test
-	void NotExistsInSet() {
+	void LargerThanSet() {
+		assertFalse(set.member(6));	
+	}
+	
+	@Test
+	void MissingWithinSet() {
 		assertFalse(set.member(4));	
 	}
 
