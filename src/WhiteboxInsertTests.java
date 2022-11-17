@@ -29,7 +29,6 @@ public class WhiteboxInsertTests {
 		set.insert(3);
 		set.insert(2);
 		set.insert(1);
-		System.out.println(set.toArray());
 		assertArrayEquals(temp, set.toArray());
 	}
 	
@@ -38,7 +37,6 @@ public class WhiteboxInsertTests {
 		int[] temp = new int[] {1};	
 		set.insert(1);
 		set.insert(1);
-		System.out.println(set.toArray());
 		assertArrayEquals(temp, set.toArray());
 	}
 
