@@ -15,7 +15,7 @@ public class WhiteboxInsertTests {
 	}
 
 	@Test
-	void firstPartOfBranchAndStatementCoverage() {
+	void ascendingOrder() {
 		int[] temp = new int[] {1,2,3};
 		set.insert(1);
 		set.insert(2);
@@ -24,11 +24,20 @@ public class WhiteboxInsertTests {
 	}
 	
 	@Test
-	void secondPartOfBranchAndStatementCoverage() {
+	void descendingOrder() {
 		int[] temp = new int[] {1,2,3};
 		
 		set.insert(3);
 		set.insert(2);
+		set.insert(1);
+		System.out.println(set.toArray());
+		assertArrayEquals(temp, set.toArray());
+	}
+	
+	@Test
+	void addingDuplicate() {
+		int[] temp = new int[] {1};	
+		set.insert(1);
 		set.insert(1);
 		System.out.println(set.toArray());
 		assertArrayEquals(temp, set.toArray());

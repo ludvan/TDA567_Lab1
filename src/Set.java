@@ -20,7 +20,7 @@ public class Set {
         return; //In order to avoid calling a.add(x)
       } else {
         if (a.get(i) == x) {
-          break;
+          return; //In order to avoid calling a.add(x)
         }
       }
     }
