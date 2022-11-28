@@ -10,6 +10,8 @@ public class WhiteboxDistinctClosedTests {
 	
 	private Set set;
 	private IntBinaryOperator addition;
+	private IntBinaryOperator subtraction;
+	private IntBinaryOperator division;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -17,6 +19,10 @@ public class WhiteboxDistinctClosedTests {
 		addition = (a,b) -> {
 			return a + b;
 		};
+		subtraction = (a,b) -> {
+			return a - b;
+		};
+		
 	}
 
 	@AfterEach
@@ -40,6 +46,24 @@ public class WhiteboxDistinctClosedTests {
 		set.insert(1);
 		set.insert(2);
 		assertFalse(set.distinctClosed(addition));
+	}
+	
+	@Test
+	void testReturnTrueSubtraction() {
+		assertTrue(set.distinctClosed(subtraction));
+	}
+	
+	@Test
+	void testIterateSubtraction() {
+		set.insert(1);
+		assertTrue(set.distinctClosed(subtraction));
+	}
+	
+	@Test 
+	void testReturnFalseSubtraction(){
+		set.insert(-1);
+		set.insert(0);
+		assertFalse(set.distinctClosed(subtraction));
 	}
 
 }
