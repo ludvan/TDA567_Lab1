@@ -59,8 +59,15 @@ public class WhiteboxDistinctClosedTests {
 		assertTrue(set.distinctClosed(subtraction));
 	}
 	
+	@Test
+	void testReturnFalseSubtraction1() {
+		set.insert(0);
+		set.insert(1);
+		assertFalse(set.distinctClosed(subtraction));
+	}
+	
 	@Test 
-	void testReturnFalseSubtraction(){
+	void testReturnFalseSubtraction2(){
 		set.insert(-1);
 		set.insert(0);
 		assertFalse(set.distinctClosed(subtraction));
