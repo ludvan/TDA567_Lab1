@@ -15,7 +15,6 @@ public class WorkScheduleSetRequiredTests {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		System.out.println("here");
 		ws = new WorkSchedule(24);
 		employee1 = "Liam";
 		employee2 = "Isak";
@@ -70,10 +69,27 @@ public class WorkScheduleSetRequiredTests {
 	 *  endtime >= starttime
 	 */
 	void endGreaterWorkEmployeeGreater(){
+		ws.setRequiredNumber(2, 1, 8);
+		ws.addWorkingPeriod(employee1, 1, 8);
+		ws.addWorkingPeriod(employee2, 1, 5);
+		
+		temp.setRequiredNumber(2, 1, 8);
+		temp.addWorkingPeriod(employee1, 1, 8);
+		temp.addWorkingPeriod(employee2, 1, 5);
 		temp.setRequiredNumber(1, 1, 8);
-		for(int i = 1; i < 9; i++) {
+		
+		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h = temp.readSchedule(i);
-			assertTrue(h.requiredNumber == 1 && h.workingEmployees.length == 1);
+			WorkSchedule.Hour h2 = ws.readSchedule(i);
+			if(i > 0 && i < 9) {
+				assertTrue(h.requiredNumber == 1);
+				assertTrue(h.workingEmployees.length == 1);
+			}else {
+				assertTrue(h.requiredNumber == h2.requiredNumber);
+				assertTrue(h.workingEmployees.length == h2.workingEmployees.length);
+				
+			}
+			
 		}
 		
 	}
@@ -83,16 +99,28 @@ public class WorkScheduleSetRequiredTests {
 	 */
 	@Test
 	void endGreaterNemployeeGreater() {
-		temp.setRequiredNumber(3, 3, 8);
+		ws.setRequiredNumber(2, 1, 8);
+		ws.addWorkingPeriod(employee1, 1, 8);
+		ws.addWorkingPeriod(employee2, 1, 5);
+		
+		temp.setRequiredNumber(2, 1, 8);
+		temp.addWorkingPeriod(employee1, 1, 8);
+		temp.addWorkingPeriod(employee2, 1, 5);
+		temp.setRequiredNumber(3, 1, 8);
+		
 		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h = temp.readSchedule(i);
 			WorkSchedule.Hour h2 = ws.readSchedule(i);
-			if(i < 3 || i > 8) {
-				assertTrue(h.requiredNumber == 3 || h.workingEmployees.length == 2);
-			} else {
-				assertTrue(h.requiredNumber == h2.requiredNumber && h.workingEmployees.length == h2.workingEmployees.length);
+			
+			if(i > 0 && i < 9) {
+				assertTrue(h.requiredNumber == 3);
+			}else {
+				assertTrue(h.requiredNumber == h2.requiredNumber);
 			}
+			assertTrue(h.workingEmployees.length == h2.workingEmployees.length);
+			
 		}
+		
 	}
 	
 	/*
@@ -123,6 +151,27 @@ public class WorkScheduleSetRequiredTests {
 			WorkSchedule.Hour h1 = temp.readSchedule(i);
 			assertTrue(h1.requiredNumber == 2 && h1.workingEmployees.length == 2);
 		}
+	}
+	
+	/*
+	 * Start time and end time outside span of the workspace
+	 */
+	@Test
+	void timeOutsideWorkSchedule() {
+		assertDoesNotThrow(() -> {ws.setRequiredNumber(1, 25, Integer.MAX_VALUE);});
+	}
+	
+	/*
+	 * nEmployee == Integer.MAX_VALUE
+	 */
+	@Test
+	void nEmployeeMax() {
+		ws.setRequiredNumber(Integer.MAX_VALUE, 0, 5);
+		for(int i = 0; i < 6; i++) {
+			WorkSchedule.Hour h1 = ws.readSchedule(i);
+			assertTrue(h1.requiredNumber == Integer.MAX_VALUE);
+		}
+		
 	}
 	
 	@AfterEach
