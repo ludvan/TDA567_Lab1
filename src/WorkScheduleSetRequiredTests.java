@@ -82,8 +82,8 @@ public class WorkScheduleSetRequiredTests {
 			WorkSchedule.Hour h = temp.readSchedule(i);
 			WorkSchedule.Hour h2 = ws.readSchedule(i);
 			if(i > 0 && i < 9) {
-				assertTrue(h.requiredNumber == 1);
-				assertTrue(h.workingEmployees.length == 1);
+				assertEquals(1, h.requiredNumber);
+				assertEquals(1, h.workingEmployees.length);
 			}else {
 				assertTrue(h.requiredNumber == h2.requiredNumber);
 				assertTrue(h.workingEmployees.length == h2.workingEmployees.length);
@@ -130,6 +130,8 @@ public class WorkScheduleSetRequiredTests {
 	@Test
 	void endtimeEqualToStartime() {
 		temp.setRequiredNumber(1, 3, 3);
+		temp.addWorkingPeriod(employee1, 3, 3);
+		temp.addWorkingPeriod(employee2, 3, 3);
 		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h1 = ws.readSchedule(i);
 			WorkSchedule.Hour h2 = temp.readSchedule(i);
@@ -147,9 +149,12 @@ public class WorkScheduleSetRequiredTests {
 	@Test
 	void workingEmployeeEqualsNemployee() {
 		temp.setRequiredNumber(2, 0, 8);
-		for(int i = 0; i < 24; i++) {
+		temp.addWorkingPeriod(employee1, 0, 8);
+		temp.addWorkingPeriod(employee2, 0, 8);
+		for(int i = 0; i < 9; i++) {
 			WorkSchedule.Hour h1 = temp.readSchedule(i);
-			assertTrue(h1.requiredNumber == 2 && h1.workingEmployees.length == 2);
+			assertTrue(h1.requiredNumber == 2);
+			assertTrue(h1.workingEmployees.length == 2);
 		}
 	}
 	
