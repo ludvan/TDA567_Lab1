@@ -15,6 +15,7 @@ public class WorkScheduleSetRequiredTests {
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		System.out.println("here");
 		ws = new WorkSchedule(24);
 		employee1 = "Liam";
 		employee2 = "Isak";
@@ -37,7 +38,8 @@ public class WorkScheduleSetRequiredTests {
 		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h = ws.readSchedule(i);
 			WorkSchedule.Hour h2 = temp.readSchedule(i);
-			assertTrue(h.requiredNumber == h2.requiredNumber && h.workingEmployees == h2.workingEmployees);
+			assertTrue(h.requiredNumber == h2.requiredNumber);
+			assertTrue(h.workingEmployees.length == h2.workingEmployees.length);
 		}
 	}
 	/*
@@ -46,15 +48,19 @@ public class WorkScheduleSetRequiredTests {
 	 */
 	@Test
 	void workingEmployeeLesserThanNemployee() {
-		temp.setRequiredNumber(3, 8, 1);
+		ws.setRequiredNumber(1, 1, 5);
+		ws.addWorkingPeriod(employee1, 1, 5);
+		temp.setRequiredNumber(1, 1, 5);
+		temp.addWorkingPeriod(employee1, 1, 5);
+		
+		//This call to setRequiredNumber should not alter temp at all since starttime is greater than endtime
+		temp.setRequiredNumber(2, 3, 1);
+		
 		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h = ws.readSchedule(i);
-			System.out.println(h.requiredNumber);
-			System.out.println(Arrays.toString(h.workingEmployees));
 			WorkSchedule.Hour h2 = temp.readSchedule(i);
-			System.out.println(h2.requiredNumber);
-			System.out.println(Arrays.toString(h2.workingEmployees));
-			assertTrue(h.requiredNumber == h2.requiredNumber && h.workingEmployees == h2.workingEmployees);
+			assertTrue(h.requiredNumber == h2.requiredNumber);
+			assertTrue(h.workingEmployees.length == h2.workingEmployees.length);
 		}
 	}
 	
