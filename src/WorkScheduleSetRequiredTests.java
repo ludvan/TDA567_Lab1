@@ -18,11 +18,7 @@ public class WorkScheduleSetRequiredTests {
 		ws = new WorkSchedule(24);
 		employee1 = "Liam";
 		employee2 = "Isak";
-		ws.addWorkingPeriod(employee1, 0, 8);
-		ws.addWorkingPeriod(employee2, 0, 10);
 		temp = new WorkSchedule(24);
-		temp.addWorkingPeriod(employee1, 0, 8);
-		temp.addWorkingPeriod(employee1, 0, 10);
 	}
 	/*
 	 * startime > endtime
@@ -30,14 +26,17 @@ public class WorkScheduleSetRequiredTests {
 	 */
 	@Test
 	void startTimeGreaterEndTime() {
+		ws.setRequiredNumber(1, 1, 5);
+		ws.addWorkingPeriod(employee1, 1, 5);
+		temp.setRequiredNumber(1, 1, 5);
+		temp.addWorkingPeriod(employee1, 1, 5);
+		
+		//This call to setRequiredNumber should not alter temp at all since starttime is greater than endtime
 		temp.setRequiredNumber(0, 3, 1);
+		
 		for(int i = 0; i < 24; i++) {
 			WorkSchedule.Hour h = ws.readSchedule(i);
-			System.out.println(h.requiredNumber);
-			System.out.println(Arrays.toString(h.workingEmployees));
 			WorkSchedule.Hour h2 = temp.readSchedule(i);
-			System.out.println(h2.requiredNumber);
-			System.out.println(Arrays.toString(h2.workingEmployees));
 			assertTrue(h.requiredNumber == h2.requiredNumber && h.workingEmployees == h2.workingEmployees);
 		}
 	}
