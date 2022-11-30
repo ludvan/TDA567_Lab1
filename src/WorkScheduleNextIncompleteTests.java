@@ -8,11 +8,13 @@ public class WorkScheduleNextIncompleteTests {
 	
 	private WorkSchedule ws1;
 	private String worker;
+	private String worker2;
 	
 	@BeforeEach
 	void setUp() throws Exception {
 		ws1 = new WorkSchedule(24);
 		worker = "Ludvig";
+		worker2 = "G-man";
 	}
 
 	@AfterEach
@@ -24,8 +26,9 @@ public class WorkScheduleNextIncompleteTests {
 	void workingEmployeesLessThannEmployee() {
 		ws1.setRequiredNumber(2, 0, 23);
 		ws1.addWorkingPeriod(worker, 0, 23);
+		ws1.addWorkingPeriod(worker2, 0, 5);
 		int time = ws1.nextIncomplete(0);
-		assertEquals(0, time);
+		assertEquals(6, time);
 	}
 
 	@Test
