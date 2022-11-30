@@ -22,15 +22,15 @@ public class WorkScheduleNextIncompleteTests {
 
 	@Test
 	void workingEmployeesLessThannEmployee() {
-		ws1.setRequiredNumber(2, 9, 11);
+		ws1.setRequiredNumber(2, 0, 23);
 		ws1.addWorkingPeriod(worker, 0, 23);
 		int time = ws1.nextIncomplete(0);
-		assertEquals(9, time);
+		assertEquals(0, time);
 	}
 
 	@Test
 	void workingEmployeesGreatherThannEmployee() {
-		ws1.setRequiredNumber(1, 9, 11);
+		ws1.setRequiredNumber(1, 0, 23);
 		ws1.addWorkingPeriod(worker, 0, 23);
 		int time = ws1.nextIncomplete(0);
 		assertEquals(-1, time);
@@ -38,10 +38,10 @@ public class WorkScheduleNextIncompleteTests {
 	
 	@Test
 	void currentTimeIncomplete() {
-		ws1.setRequiredNumber(2, 9, 11);
+		ws1.setRequiredNumber(2, 2, 23);
 		ws1.addWorkingPeriod(worker, 0, 23);
 		int time = ws1.nextIncomplete(9);
-		assertEquals(9, time);
+		assertEquals(2, time);
 	}
 	
 }
