@@ -42,8 +42,8 @@ public class WorkScheduleNextIncompleteTests {
 	@Test
 	void currentTimeIncomplete() {
 		ws1.setRequiredNumber(2, 2, 23);
-		ws1.addWorkingPeriod(worker, 0, 23);
-		int time = ws1.nextIncomplete(9);
+		ws1.addWorkingPeriod(worker, 2, 23);
+		int time = ws1.nextIncomplete(2);
 		assertEquals(2, time);
 	}
 	
