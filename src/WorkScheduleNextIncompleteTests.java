@@ -43,4 +43,13 @@ public class WorkScheduleNextIncompleteTests {
 		int time = ws1.nextIncomplete(9);
 		assertEquals(9, time);
 	}
+	
+	@Test
+	void maxTimeIncomplete() {
+		WorkSchedule tmp = new WorkSchedule(Integer.MAX_VALUE);
+		tmp.setRequiredNumber(2, 0, Integer.MAX_VALUE);
+		tmp.addWorkingPeriod(worker, 0, Integer.MAX_VALUE);
+		int time = tmp.nextIncomplete(Integer.MAX_VALUE);
+		assertEquals(Integer.MAX_VALUE, time);
+	}
 }
