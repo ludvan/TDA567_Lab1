@@ -6,7 +6,11 @@ class WhiteBoxIntersectTests {
 	
 	private Set a;
 	private Set b;
-	private int[] res = {1};
+	private Set c;
+	private Set d;
+	private int[] ABres = {1};
+	private int[] ACDres = {};
+
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -18,6 +22,10 @@ class WhiteBoxIntersectTests {
 		b.insert(1);
 		b.insert(4);
 		b.insert(5);
+		c = new Set();
+		c.insert(7);
+		c.insert(8);
+		d = new Set();
 	}
 	
 	
@@ -35,8 +43,19 @@ class WhiteBoxIntersectTests {
 	@Test
 	void statementAndBranchCoverage() {
 		a.intersect(b);
-		assertTrue(arrayEqual(a.toArray(), res));
-		
+		assertTrue(arrayEqual(a.toArray(), ABres));
+	}
+	
+	@Test
+	void noCommonElements() {
+		a.intersect(c);
+		assertTrue(arrayEqual(a.toArray(), ACDres));
+	}
+	
+	@Test
+	void noElements() {
+		a.intersect(c);
+		assertTrue(arrayEqual(a.toArray(), ACDres));
 	}
 
 }
