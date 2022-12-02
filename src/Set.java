@@ -54,9 +54,10 @@ public class Set {
       }
      // a can still contain elements that should not be left in, 
      //but since they were bigger than any element in s they have not been removed. This will remove these elements
-     while(a.size() > newSize) { 
-    	 a.remove(a.size()-1);
+     
      }
+    while(a.size() > newSize) { 
+   	 a.remove(a.size()-1);
     }
   }
   

@@ -53,7 +53,7 @@ class WhiteBoxIntersectTests {
 	}
 	
 	@Test
-	void noElements() {
+	void noElements() {		
 		a.intersect(d);
 		assertTrue(arrayEqual(a.toArray(), ACDres));
 	}
